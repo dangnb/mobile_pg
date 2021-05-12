@@ -1,13 +1,8 @@
 import 'dart:convert';
-import 'dart:io';
-
 import 'package:flutter/cupertino.dart';
 import 'package:http/http.dart' as http;
-import 'package:pg_app/utils/api_base.dart';
-import 'package:pg_app/utils/api_base_cer.dart';
 import 'package:pg_app/utils/session.dart';
 import 'package:pg_app/utils/store_location.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 
 
@@ -17,16 +12,10 @@ class UserRepository {
 
   Future<bool> login (
   {@required String username, @required String password}) async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    var data={
-      'Username': username,
-      'Password': password,
-      'ComId': 9
-    };
-    var response= await Session.apiPost('/api/client/v1/account/login', data);
+    var response= await Session.Login(url: '/api/client/v1/account/login', comId: "9",userName:  username,passWord: password);
     var result=jsonDecode(response);
-    if(result['isSuccessed'] as bool){
-      StoreLocation.setToken(result['resultObj'] as String);
+    if(result!=null){
+      StoreLocation.setToken(result['token'] as String);
       return true;
     }
     return false;
