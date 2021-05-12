@@ -21,9 +21,10 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
             username: loginEvent.username.trim(),
             password: loginEvent.password.trim());
         if (isLoginSuccess) {
-          LoginState.success();
+          yield LoginState.success();
+          return;
         }
-        LoginState.failure();
+        yield LoginState.failure();
       } catch (_) {
         yield LoginState.failure();
       }

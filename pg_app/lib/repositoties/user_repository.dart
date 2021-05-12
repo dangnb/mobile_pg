@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'package:flutter/cupertino.dart';
 import 'package:http/http.dart' as http;
+import 'package:pg_app/common/config_system.dart';
 import 'package:pg_app/utils/session.dart';
 import 'package:pg_app/utils/store_location.dart';
 
@@ -13,9 +14,9 @@ class UserRepository {
   Future<bool> login (
   {@required String username, @required String password}) async {
     var response= await Session.Login(url: '/api/client/v1/account/login', comId: "9",userName:  username,passWord: password);
-    var result=jsonDecode(response);
+    var result= jsonDecode(response);
     if(result!=null){
-      StoreLocation.setToken(result['token'] as String);
+      await StoreLocation.setToken(result['token'] as String);
       return true;
     }
     return false;

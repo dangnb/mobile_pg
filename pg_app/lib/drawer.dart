@@ -1,5 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:pg_app/pages/login/login_page.dart';
+import 'package:pg_app/utils/store_location.dart';
 
 import 'change_password/change_password.dart';
 
@@ -59,6 +61,13 @@ class GalleryDrawer extends StatelessWidget {
           ListTile(
             leading: Icon(Icons.logout),
             title: Text('Đăng xuất'),
+            onTap: () async {
+              await StoreLocation.removeToken();
+              Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => LoginPage()),
+              );
+            },
           )
         ],
       ),
