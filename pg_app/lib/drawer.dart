@@ -1,9 +1,12 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pg_app/pages/login/login_page.dart';
 import 'package:pg_app/utils/store_location.dart';
 
+import 'blocs/authentication_bloc.dart';
 import 'change_password/change_password.dart';
+import 'events/authentication_event.dart';
 
 class GalleryDrawer extends StatelessWidget {
   @override
@@ -62,11 +65,7 @@ class GalleryDrawer extends StatelessWidget {
             leading: Icon(Icons.logout),
             title: Text('Đăng xuất'),
             onTap: () async {
-              await StoreLocation.removeToken();
-              Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => LoginPage()),
-              );
+              BlocProvider.of<AuthenticationBloc>(context).add(AuthenticationEventLoggedOut());
             },
           )
         ],
