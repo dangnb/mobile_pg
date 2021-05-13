@@ -1,9 +1,12 @@
 
+import 'dart:async';
 import 'dart:io';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:geolocator/geolocator.dart';
+import 'package:pg_app/repositoties/check_in_repository.dart';
 
 class CheckIn extends StatefulWidget {
   @override
@@ -14,6 +17,7 @@ class CheckIn extends StatefulWidget {
 }
 
 class _CheckInState extends State<CheckIn> {
+  Position _currentPosition;
   // ignore: deprecated_member_use
   List<File> imageFiles= [];
   _openGallary(BuildContext context) async{
@@ -59,19 +63,23 @@ class _CheckInState extends State<CheckIn> {
           );
         });
   }
-  Widget _decideImageView(){
-    if(imageFiles.isEmpty||imageFiles.length==0){
-      return Text("No image Selected!");
-    }else{
-      return ListView.builder(
-        itemCount: imageFiles.length,
-        itemBuilder: (BuildContext context, int index){
-          return Container(
-            child: Image.file(imageFiles[index], width: 400,height: 400,),
+  Widget buildGridView() {
+    if(imageFiles.isEmpty||imageFiles.length==0){return Text("No image Selected!");}else{
+      return GridView.count(
+        scrollDirection: Axis.vertical,
+        shrinkWrap: true,
+        crossAxisCount: imageFiles.length,
+        children: List.generate(imageFiles.length, (index) {
+          File asset = imageFiles[index];
+          return Image.file(
+            asset,
+            width: 2,
+            height: 2,
           );
-        },
+        }),
       );
     }
+
   }
 
   @override
@@ -86,10 +94,20 @@ class _CheckInState extends State<CheckIn> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: <Widget>[
-              _decideImageView(),
+              if (_currentPosition != null) Text(
+                  "LAT: ${_currentPosition.latitude}, LNG: ${_currentPosition.longitude}"
+              ),
+              buildGridView(),
               RaisedButton(
                 onPressed: () {_showChoiceDialog(context);},
                 child: Text("Select Image!"),
+              ),
+              RaisedButton(
+                onPressed: () {
+                  CheckInRepository repository= new CheckInRepository();
+                  repository.CheckIn(files: imageFiles, note: "dangnb");
+                },
+                child: Text("Check in!"),
               )
             ],
           ),
