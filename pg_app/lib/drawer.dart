@@ -1,9 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:pg_app/pages/login/login.dart';
-import 'package:pg_app/pages/login/login_page.dart';
-import 'package:pg_app/utils/store_location.dart';
 
 import 'blocs/authentication_bloc.dart';
 import 'change_password/change_password.dart';
@@ -52,10 +49,6 @@ class GalleryDrawer extends StatelessWidget {
           ),
           ListTile(
             onTap: (){
-               Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => LoginScreen()),
-              );
             },
             leading: Icon(Icons.whatshot),
             title: Text('Lịch check in'),
