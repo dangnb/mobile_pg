@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_login/constants.dart';
+
+import '../../constants.dart';
 
 class InputContainer extends StatelessWidget {
   const InputContainer({

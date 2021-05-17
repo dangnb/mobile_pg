@@ -1,20 +1,21 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_login/constants.dart';
+import '../../constants.dart';
 
 class RoundedButton extends StatelessWidget {
   const RoundedButton({
     Key key,
     @required this.title,
+    @required this.action
   }) : super(key: key);
 
   final String title;
-
+  final dynamic action;
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
 
     return InkWell(
-      onTap: () {},
+      onTap: action,
       borderRadius: BorderRadius.circular(30),
       child: Container(
         width: size.width * 0.8,

@@ -1,14 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_login/components/input_container.dart';
-import 'package:flutter_login/constants.dart';
+import '../../constants.dart';
+import 'input_container.dart';
 
 class RoundedInput extends StatelessWidget {
   const RoundedInput({
     Key key,
     @required this.icon,
-    @required this.hint
+    @required this.hint,
+    @required this.controller
   }) : super(key: key);
-
+  final TextEditingController controller;
   final IconData icon;
   final String hint;
 
@@ -16,6 +17,7 @@ class RoundedInput extends StatelessWidget {
   Widget build(BuildContext context) {
     return InputContainer(
       child: TextField(
+        controller: controller,
         cursorColor: kPrimaryColor,
         decoration: InputDecoration(
           icon: Icon(icon, color: kPrimaryColor),
