@@ -11,4 +11,5 @@ abstract class LoginApi {
 
   @POST('/login')
   Future<LoginResponse> login(@Body() LoginRequest request);
+
 }

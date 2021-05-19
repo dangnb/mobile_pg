@@ -28,6 +28,7 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
       yield LoginLoadingState();
       await loginUseCase.login(
         LoginRequest(
+          comId: 9,
           userName: event.userName,
           password: event.password,
         ),

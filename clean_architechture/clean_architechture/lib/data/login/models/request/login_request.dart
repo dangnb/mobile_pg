@@ -6,10 +6,12 @@ part 'login_request.g.dart';
 class LoginRequest {
   final String userName;
   final String password;
+  final int comId;
 
   LoginRequest({
     required this.userName,
     required this.password,
+    required this.comId
   });
   //
   factory LoginRequest.fromJson(Map<String, dynamic> json) =>
