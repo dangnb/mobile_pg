@@ -1,8 +1,21 @@
+import 'dart:async';
+
+import 'package:pg_app/helper/validatioon/validation.dart';
 import 'package:rxdart/rxdart.dart';
 class LoginVewModel{
   final BehaviorSubject<String> _emailController = BehaviorSubject<String>();
   final BehaviorSubject<String> _passwordController = BehaviorSubject<String>();
-
+  final BehaviorSubject<bool> _btnController = BehaviorSubject<bool>();
+var emailValidation= StreamTransformer<String,String>.fromHandlers(
+  handleData: (email,sink){
+    sink.add(email);
+  }
+);
+  var passValidation= StreamTransformer<String,String>.fromHandlers(
+      handleData: (pass,sink){
+        sink.add(pass);
+      }
+  );
 //
 //  Inputs
 //
@@ -12,15 +25,25 @@ class LoginVewModel{
 //
 // Validators
 //
-  Stream<String> get email => _emailController.stream.transform(validateEmail);
-  Stream<String> get password => _passwordController.stream.transform(validatePassword);
+  Stream<String> get emailStream => _emailController.stream.transform(emailValidation);
+  Sink<String> get  emaiSink => _emailController.sink;
+  Stream<String> get passStream => _passwordController.stream.transform(passValidation);
+  Sink<String> get passSink => _passwordController.sink;
+  Stream<bool> get btnStream => _btnController.stream;
+  Sink<bool> get btnSink => _btnController.sink;
 
 //
 // Outcome of the validation
 //
-  Stream<bool> get registerValid => Observable.combineLatest2(
-      email,
-      password,
-          (e, p) => true
-  );
+
+  dispose(){
+    _emailController.close();
+    _passwordController.close();
+    _btnController.close();
+  }
+  LoginVewModel(){
+    Rx.combineLatest2(_emailController, _passwordController, (a, b){
+      return Validation.validateEmail(a)==null&&Validation.validatePass(b)==null;
+    }).listen((event) {btnSink.add(event);});
+  }
 }

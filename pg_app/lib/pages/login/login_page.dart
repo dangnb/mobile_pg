@@ -36,6 +36,7 @@ class _LoginPageState extends State<LoginPage>{
     // TODO: implement initState
     super.initState();
     _loginBloc = BlocProvider.of<LoginBloc>(context);
+
   }
 
   bool get isPopulated =>
@@ -53,7 +54,7 @@ class _LoginPageState extends State<LoginPage>{
           border:
           OutlineInputBorder(borderRadius: BorderRadius.circular(32.0))),
     );
-    final passwordField = TextField(
+    final passwordField = TextFormField(
       controller: _passwordController,
       obscureText: true,
       style: style,
