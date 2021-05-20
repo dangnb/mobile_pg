@@ -16,7 +16,7 @@ class AppConfig {
   static AppConfig? _instance;
 
   static AppConfig devConfig = AppConfig(
-    apiBaseUrl: 'http://42.112.21.231:8003/api/client/v1/',
+    apiBaseUrl: 'https://api.dev2.setel.my/api/',
     appFlavor: AppFlavor.Development,
   );
 

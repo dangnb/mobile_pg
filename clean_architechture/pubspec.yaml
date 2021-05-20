@@ -46,7 +46,6 @@ dependencies:
   firebase_analytics: ^8.0.1
   firebase_crashlytics: ^2.0.0
   flutter_screenutil: ^5.0.0
-  device_info: any
 #  pull_to_refresh: ^1.6.4-nullsafety.0
 
 dev_dependencies:

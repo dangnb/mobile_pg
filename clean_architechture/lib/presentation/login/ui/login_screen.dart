@@ -4,7 +4,6 @@ import 'package:clean_architechture/generated/l10n.dart';
 import 'package:clean_architechture/presentation/common/dialog/loading_dialog.dart';
 import 'package:clean_architechture/presentation/login/bloc/login_bloc.dart';
 import 'package:clean_architechture/utils/route/app_routing.dart';
-import 'package:device_info/device_info.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
@@ -17,26 +16,6 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
-
-  Future<String> _getId() async {
-    DeviceInfoPlugin deviceInfo = DeviceInfoPlugin();
-    if (Theme.of(context).platform == TargetPlatform.iOS) {
-      IosDeviceInfo iosDeviceInfo = await deviceInfo.iosInfo;
-      return iosDeviceInfo.identifierForVendor; // unique ID on iOS
-    } else {
-      AndroidDeviceInfo androidDeviceInfo = await deviceInfo.androidInfo;
-      return androidDeviceInfo.androidId; // unique ID on Android
-    }
-  }
-  @override
-  void initState() {
-    // TODO: implement initState
-    super.initState();
-    _getId().then((id) {
-      String deviceId = id;
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<LoginBloc, LoginState>(
@@ -70,8 +49,8 @@ class _LoginScreenState extends State<LoginScreen> {
                 onPressed: () {
                   context.read<LoginBloc>().add(
                         LoginPressed(
-                          "dangnb",
-                          "1234567",
+                          "userName",
+                          "password",
                           false,
                         ),
                       );
