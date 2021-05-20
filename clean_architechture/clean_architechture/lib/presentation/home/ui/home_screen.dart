@@ -1,3 +1,4 @@
+import 'package:clean_architechture/presentation/chart/chie_chart.dart';
 import 'package:clean_architechture/presentation/check_in/check_in.dart';
 import 'package:clean_architechture/presentation/notification/notification.dart';
 import 'package:flutter/foundation.dart';
@@ -15,7 +16,7 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   final GlobalKey _keyRed = GlobalKey();
   String containerSize = "";
-
+  String dropdownValue = 'One';
   String get _containerSize =>
       containerSize.isNotEmpty ? "Container Width Height : $containerSize" : "";
 
@@ -72,7 +73,7 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
             ),
             Container(
-              margin: const EdgeInsets.only(left: FormatContains.MarginLeftContain, right: FormatContains.MarginRightContain, top: FormatContains.MarginTopContain),
+              margin: const EdgeInsets.only(left: 10.0, right: 10.0, top: 10.0),
               child: Row(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -105,9 +106,9 @@ class _HomeScreenState extends State<HomeScreen> {
                     height: 2,
                     color: Colors.deepPurpleAccent,
                   ),
-                  onChanged: (String newValue) async {
+                  onChanged: (String? newValue)  {
                     setState(() {
-                      dropdownValue = newValue;
+                      dropdownValue = newValue!!;
                     });
                   },
                   items: <String>['One', 'Two', 'Free', 'Four']

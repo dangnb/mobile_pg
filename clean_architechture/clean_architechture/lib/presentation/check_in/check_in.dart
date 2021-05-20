@@ -2,11 +2,11 @@
 import 'dart:async';
 import 'dart:io';
 
+import 'package:clean_architechture/domain/login/repositories/check_in_repository.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:geolocator/geolocator.dart';
-import 'package:pg_app/repositoties/check_in_repository.dart';
 
 class CheckIn extends StatefulWidget {
   @override
