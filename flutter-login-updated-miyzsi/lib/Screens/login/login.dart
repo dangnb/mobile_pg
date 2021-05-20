@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_login/Screens/login/components/cancel_button.dart';
-import 'package:flutter_login/Screens/login/components/login_form.dart';
-import 'package:flutter_login/Screens/login/components/register_form.dart';
+import 'C:\/Users/5SCOMPUTER/OneDrive/Desktop/clean_architechture/clean_architechture/lib/presentation/login/ui/components/cancel_button.dart';
+import 'C:\/Users/5SCOMPUTER/OneDrive/Desktop/clean_architechture/clean_architechture/lib/presentation/login/ui/components/login_form.dart';
+import 'C:\/Users/5SCOMPUTER/OneDrive/Desktop/clean_architechture/clean_architechture/lib/presentation/login/ui/components/register_form.dart';
 import 'package:flutter_login/constants.dart';
 
 class LoginScreen extends StatefulWidget {
