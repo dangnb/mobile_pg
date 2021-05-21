@@ -1,8 +1,11 @@
 import 'package:clean_architechture/config/app_config.dart';
 import 'package:clean_architechture/config/theme.dart';
+import 'package:clean_architechture/data/checkin/remote/checkin_api.dart';
+import 'package:clean_architechture/data/checkin/repositories/checkin_repository_impl.dart';
 import 'package:clean_architechture/data/login/data_sources/remote/login_api.dart';
 import 'package:clean_architechture/data/login/repositories/login_repository_impl.dart';
 import 'package:clean_architechture/data/utils/shared_pref_manager.dart';
+import 'package:clean_architechture/domain/checkin/respositories/check_in_repository.dart';
 import 'package:clean_architechture/domain/login/repositories/login_repository.dart';
 import 'package:dio/dio.dart';
 import 'package:get_it/get_it.dart';
@@ -45,12 +48,19 @@ Future<void> _registerNetworkComponents() async {
 
   getIt
       .registerSingleton(LoginApi(dio, baseUrl: dio.options.baseUrl));
+  getIt
+      .registerSingleton(CheckInApi(dio, baseUrl: dio.options.baseUrl));
 }
 
 void _registerRepository() {
   getIt.registerFactory<LoginRepository>(
     () => LoginRepositoryImpl(
       getIt<LoginApi>(),
+    ),
+  );
+  getIt.registerFactory<CheckInRepository>(
+        () => CheckInRepositoryImpl(
+      getIt<CheckInApi>(),
     ),
   );
 }

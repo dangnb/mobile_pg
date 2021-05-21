@@ -7,20 +7,20 @@ class CheckInResponse {
   final int Id;
   final String EmployeeCode;
   final String CheckDate;
-  final String Checkin;
-  final String CheckIn_Longitude;
-  final String CheckIn_Latitude;
-  final String CheckIn_Images;
-  final String CheckIn_Note;
-  final String CheckIn_ShopId;
-  final String CheckIn_ShopAddress;
-  final String CheckOut;
-  final String CheckOut_Longitude;
-  final String CheckOut_Latitude;
-  final String CheckOut_Images;
-  final String CheckOut_Note;
-  final String CheckOut_ShopId;
-  final String CheckOut_ShopAddress;
+  final String? Checkin;
+  final double CheckIn_Longitude;
+  final double CheckIn_Latitude;
+  final List<dynamic> CheckIn_Images;
+  final String? CheckIn_Note;
+  final int? CheckIn_ShopId;
+  final String? CheckIn_ShopAddress;
+  final String? CheckOut;
+  final double CheckOut_Longitude;
+  final double CheckOut_Latitude;
+  final List<dynamic>  CheckOut_Images;
+  final String? CheckOut_Note;
+  final int? CheckOut_ShopId;
+  final String? CheckOut_ShopAddress;
   CheckInResponse({required this.Id
     ,required this.EmployeeCode
     , required this.Checkin,

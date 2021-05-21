@@ -1,5 +1,6 @@
-import 'package:clean_architechture/presentation/check_in/check_in.dart';
+import 'package:clean_architechture/presentation/check_in/ui/check_in.dart';
 import 'package:clean_architechture/presentation/notification/notification.dart';
+import 'package:clean_architechture/utils/route/app_routing.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
@@ -62,10 +63,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     child: Text("Check in"),
                     color: Colors.blue,
                     onPressed: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (context) => CheckIn()),
-                      );
+                      Navigator.pushNamed(context, RouteDefine.CheckInScreen.name);
                     },
                   ),
                 ],
@@ -77,10 +75,10 @@ class _HomeScreenState extends State<HomeScreen> {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: <Widget>[
-                  Text('Kết thúc:'),
+                  const Text('Kết thúc:'),
                   Container(
                     width: 100.0,
-                    child: TextField(
+                    child: const TextField(
                       keyboardType: TextInputType.number,
                     ),
                   ),
@@ -135,37 +133,37 @@ class _HomeScreenState extends State<HomeScreen> {
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: [
                         Container(
-                          margin: EdgeInsets.all(0),
+                          margin: const EdgeInsets.all(0),
                           padding: EdgeInsets.all(0),
                           width: 100.0,
                           height: 30.0,
-                          child: Center(child: Text('Da dat',textAlign: TextAlign.center,),),
-                          decoration: BoxDecoration(
+                          decoration: const BoxDecoration(
                               color: Colors.blue
                           ),
+                          child: const Center(child: Text('Da dat',textAlign: TextAlign.center,),),
                         ),
                         Container(
-                          margin: EdgeInsets.all(0),
-                          padding: EdgeInsets.all(0),
+                          margin: const EdgeInsets.all(0),
+                          padding: const EdgeInsets.all(0),
                           width: 100.0,
                           height: 30.0,
-                          child: Center(child: Text('0 VND',textAlign: TextAlign.center,style: TextStyle(fontWeight: FontWeight.bold),),),
+                          child: Center(child: const Text('0 VND',textAlign: TextAlign.center,style: TextStyle(fontWeight: FontWeight.bold),),),
                         )
                       ],
                     ),
                   ),
                   Container(
-                    margin: EdgeInsets.only(top: 10.0),
+                    margin: const EdgeInsets.only(top: 10.0),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: [
                         Container(
-                          margin: EdgeInsets.all(0),
-                          padding: EdgeInsets.all(0),
+                          margin: const EdgeInsets.all(0),
+                          padding: const EdgeInsets.all(0),
                           width: 100.0,
                           height: 30.0,
                           child: Center(child: Text('Da dat',textAlign: TextAlign.center,),),
-                          decoration: BoxDecoration(
+                          decoration: const BoxDecoration(
                               color: Colors.green
                           ),
                         ),
