@@ -1,4 +1,3 @@
-import 'package:clean_architechture/presentation/chart/chie_chart.dart';
 import 'package:clean_architechture/presentation/check_in/check_in.dart';
 import 'package:clean_architechture/presentation/notification/notification.dart';
 import 'package:flutter/foundation.dart';
@@ -108,7 +107,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   ),
                   onChanged: (String? newValue)  {
                     setState(() {
-                      dropdownValue = newValue!!;
+                      dropdownValue = newValue!;
                     });
                   },
                   items: <String>['One', 'Two', 'Free', 'Four']
@@ -123,8 +122,8 @@ class _HomeScreenState extends State<HomeScreen> {
               margin: const EdgeInsets.only(left: 20.0, right: 20.0, top: 0.0),
               width: 700.0,
               height: 300.0,
-              child: Expanded(
-                child: SimplePieChart.withSampleData(),
+              child: const Expanded(
+                child: Text('Bieu do'),
               ),
             ),
             Container(

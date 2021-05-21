@@ -1,7 +1,4 @@
-import 'package:clean_architechture/config/app_config.dart';
 import 'package:clean_architechture/config/colors.dart';
-import 'package:clean_architechture/gen/assets.gen.dart';
-import 'package:clean_architechture/generated/l10n.dart';
 import 'package:clean_architechture/presentation/common/dialog/loading_dialog.dart';
 import 'package:clean_architechture/presentation/login/bloc/login_bloc.dart';
 import 'package:clean_architechture/utils/route/app_routing.dart';
@@ -157,7 +154,7 @@ class _LoginScreenState extends State<LoginScreen> with SingleTickerProviderStat
         width: double.infinity,
         height: containerSize.value,
         decoration: BoxDecoration(
-            borderRadius: BorderRadius.only(
+            borderRadius: const BorderRadius.only(
               topLeft: Radius.circular(100),
               topRight: Radius.circular(100),
             ),

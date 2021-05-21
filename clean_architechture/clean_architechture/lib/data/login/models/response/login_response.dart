@@ -5,7 +5,6 @@ part 'login_response.g.dart';
 
 @JsonSerializable()
 class LoginResponse {
-  @override
   final String token;
   final String oneSignal_AppID;
 

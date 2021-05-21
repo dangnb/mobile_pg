@@ -11,9 +11,9 @@ class CheckInApi {
       required List<File> files,
       required double longitude,
       required double latitude}) async {
-    var token = "Bearer " +  SessionUtils.getAccessToken()!!;
+    var token = "Bearer " +  SessionUtils.getAccessToken()!;
     var headers = {'Authorization': token};
-    Uri uri = Uri.parse("" + url);
+    var uri = Uri.parse("" + url);
     var request = http.MultipartRequest('POST', uri);
     request.fields.addAll({
       'Longitude': longitude.toString(),
