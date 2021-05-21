@@ -19,7 +19,7 @@ class CheckInRepositoryImpl implements CheckInRepository{
     // TODO: implement CheckIn
     var location = await _getCurrentLocation();
     var token= SessionUtils.getAccessToken();
-    var result=await checkInApi.checkIn(files, location.longitude, location.latitude, note, token)
+    var result=await checkInApi.checkIn(files, location.longitude, location.latitude, note, token);
     return result;
   }
 
