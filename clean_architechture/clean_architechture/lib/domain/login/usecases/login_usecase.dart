@@ -8,5 +8,8 @@ class LoginUseCase {
 
   LoginUseCase(this._repository);
 
-  Future<LoginResponse> login(LoginRequest request) => _repository.login(request);
+  Future<LoginResponse> login(LoginRequest request,String deviceID) => _repository.login(request,deviceID);
+
+  Future<bool> isLogin()=>_repository.isLogin();
+  void signOut()=>_repository.signOut();
 }

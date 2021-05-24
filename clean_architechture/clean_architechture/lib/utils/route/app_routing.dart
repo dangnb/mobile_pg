@@ -1,4 +1,6 @@
 import 'package:clean_architechture/presentation/check_in/checkin-route.dart';
+import 'package:clean_architechture/presentation/check_out/checkout_route.dart';
+import 'package:clean_architechture/presentation/check_out/ui/check_out.dart';
 import 'package:clean_architechture/presentation/home/home_route.dart';
 import 'package:clean_architechture/presentation/list_user/list_user_route.dart';
 import 'package:clean_architechture/presentation/login/login_route.dart';
@@ -7,7 +9,8 @@ import 'package:flutter/material.dart';
 enum RouteDefine {
   LoginScreen,
   HomeScreen,
-  CheckInScreen
+  CheckInScreen,
+  CheckOutScreen
 }
 
 class AppRouting {
@@ -16,6 +19,7 @@ class AppRouting {
       RouteDefine.LoginScreen.name: (_) => LoginRoute.route,
       RouteDefine.HomeScreen.name: (_) => HomeRoute.route,
       RouteDefine.CheckInScreen.name: (_) => CheckInRoute.route,
+      RouteDefine.CheckOutScreen.name: (_) => CheckOutRoute.route,
     };
 
     final routeBuilder = routes[settings.name];

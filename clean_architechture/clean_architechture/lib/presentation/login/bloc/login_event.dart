@@ -7,11 +7,13 @@ abstract class LoginEvent extends Equatable {
 class LoginPressed extends LoginEvent {
   final String userName;
   final String password;
+  final String deviceId;
   final bool isError;
 
   LoginPressed(
     this.userName,
     this.password,
+    this.deviceId,
     this.isError,
   );
 
@@ -19,6 +21,7 @@ class LoginPressed extends LoginEvent {
   List<Object> get props => [
         userName,
         password,
+        deviceId,
         isError,
       ];
 }

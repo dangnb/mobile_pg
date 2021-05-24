@@ -2,6 +2,8 @@ import 'package:clean_architechture/data/login/data_sources/remote/login_api.dar
 import 'package:clean_architechture/data/login/models/request/login_request.dart';
 import 'package:clean_architechture/data/login/models/response/login_response.dart';
 import 'package:clean_architechture/domain/login/repositories/login_repository.dart';
+import 'package:clean_architechture/utils/session_utils.dart';
+import 'package:device_info/device_info.dart';
 
 class LoginRepositoryImpl implements LoginRepository {
   final LoginApi api;
@@ -9,10 +11,9 @@ class LoginRepositoryImpl implements LoginRepository {
   LoginRepositoryImpl(this.api);
 
   @override
-  Future<LoginResponse> login(LoginRequest request) async {
+  Future<LoginResponse> login(LoginRequest request, String deviceId) async {
     try {
-      var deviceId='157a46fe1c03c03d';
-      final loginResponse = await api.login(request,deviceId);
+      final loginResponse = await api.login(request, deviceId);
       //await Future.delayed(const Duration(seconds: 3));
       return loginResponse;
     } catch (e) {
@@ -21,13 +22,13 @@ class LoginRepositoryImpl implements LoginRepository {
   }
 
   @override
-  bool isLogin() {
-    // TODO: implement isLogin
-    throw UnimplementedError();
+  Future<bool> isLogin() async {
+    var token = SessionUtils.getAccessToken();
+    return token != null;
   }
 
   @override
   void signOut() {
-    // TODO: implement signOut
+    SessionUtils.remoteAccessToken();
   }
 }

@@ -1,4 +1,5 @@
 {
   "home": "Trang chủ",
-  "title": "Xin chào {name}"
+  "title": "Xin chào {name}",
+  "error_system": "Có lỗi xảy ra"
 }

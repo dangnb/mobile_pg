@@ -9,16 +9,19 @@ class CheckInInitialState extends CheckInSate{
   List<Object?> get props => [];
 }
 class CheckInSuccessState extends CheckInSate{
-  final CheckInResponse? checkInResponse;
-  CheckInSuccessState({this.checkInResponse});
+   // ignore: recursive_getters
+  final String message;
+  CheckInSuccessState({ required this.message});
   @override
   // TODO: implement props
-  List<Object?> get props => [checkInResponse];
+  List<Object?> get props => [message];
 }
 class CheckInErrorState extends CheckInSate{
+  final String message;
+  CheckInErrorState({ required this.message});
   @override
   // TODO: implement props
-  List<Object?> get props => [];
+  List<Object?> get props => [message];
 }
 class CheckInLoadingState extends CheckInSate {
   @override

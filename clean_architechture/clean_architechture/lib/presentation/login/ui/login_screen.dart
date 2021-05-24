@@ -2,6 +2,7 @@ import 'package:clean_architechture/config/colors.dart';
 import 'package:clean_architechture/presentation/common/dialog/loading_dialog.dart';
 import 'package:clean_architechture/presentation/login/bloc/login_bloc.dart';
 import 'package:clean_architechture/utils/route/app_routing.dart';
+import 'package:device_info/device_info.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -45,7 +46,16 @@ class _LoginScreenState extends State<LoginScreen> with SingleTickerProviderStat
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
-
+    Future<String> _getId() async {
+      var deviceInfo = DeviceInfoPlugin();
+      if (Theme.of(context).platform == TargetPlatform.iOS) {
+        var iosDeviceInfo = await deviceInfo.iosInfo;
+        return iosDeviceInfo.identifierForVendor; // unique ID on iOS
+      } else {
+        var androidDeviceInfo = await deviceInfo.androidInfo;
+        return androidDeviceInfo.androidId; // unique ID on Android
+      }
+    }
     var viewInset = MediaQuery.of(context).viewInsets.bottom; // we are using this to determine Keyboard is opened or not
     var defaultLoginSize = size.height - (size.height * 0.2);
     var defaultRegisterSize = size.height - (size.height * 0.1);
@@ -120,7 +130,7 @@ class _LoginScreenState extends State<LoginScreen> with SingleTickerProviderStat
                   // Login Form
                   LoginForm(isLogin: isLogin, animationDuration: animationDuration
                     , size: size, defaultLoginSize: defaultLoginSize
-                    ,userNameController: userNameController,passwordController: passwordController),
+                    ,userNameController: userNameController,passwordController: passwordController,deviceId: _getId(),),
 
                   // Register Container
                   AnimatedBuilder(

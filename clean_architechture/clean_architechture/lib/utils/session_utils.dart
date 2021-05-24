@@ -10,4 +10,6 @@ class SessionUtils {
           );
   static String? getAccessToken() =>
         getIt.get<SharedPreferencesManager>().getString(SharedPreferenceKey.keyAccessToken);
+  static void remoteAccessToken() =>
+      getIt.get<SharedPreferencesManager>().removeByKey(SharedPreferenceKey.keyAccessToken);
 }

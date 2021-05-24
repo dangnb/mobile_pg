@@ -1,4 +1,5 @@
 {
   "home": "Home",
-  "title": "Heelo {name}"
+  "title": "Heelo {name}",
+  "error_system": "Error system"
 }

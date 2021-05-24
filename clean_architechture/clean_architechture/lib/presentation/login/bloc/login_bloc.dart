@@ -27,17 +27,16 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
   Stream<LoginState> _mapLoginPressToState(LoginPressed event) async* {
     try {
       yield LoginLoadingState();
-      var reponse= await loginUseCase.login(
-        LoginRequest(
-          comId: 9,
-          userName: event.userName,
-          password: event.password,
-        ),
-      );
-      if(reponse.token!=null){
-        SessionUtils.saveAccessToken(reponse.token);
-        event=LoginPressed(event.userName,event.password,true);
-      }
+      var response = await loginUseCase.login(
+          LoginRequest(
+            comId: 9,
+            userName: event.userName,
+            password: event.password,
+          ),
+          event.deviceId);
+      SessionUtils.saveAccessToken(response.token);
+      event =
+          LoginPressed(event.userName, event.password, event.deviceId, true);
       if (!event.isError) {
         yield LoginErrorState();
       } else {

@@ -9,6 +9,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 class LoginForm extends StatelessWidget {
   final userNameController;
   final passwordController ;
+  final deviceId;
   const LoginForm({
     Key? key,
     required this.isLogin,
@@ -16,7 +17,8 @@ class LoginForm extends StatelessWidget {
     required this.size,
     required this.defaultLoginSize,
     required this.userNameController,
-    required this.passwordController
+    required this.passwordController,
+    required this.deviceId
   }) : super(key: key);
 
   final bool isLogin;
@@ -64,6 +66,7 @@ class LoginForm extends StatelessWidget {
                    print('login');
                    BlocProvider.of<LoginBloc>(context).add(LoginPressed(
                      userNameController.text,
+                     deviceId,
                      passwordController.text,
                      true,
                    ));

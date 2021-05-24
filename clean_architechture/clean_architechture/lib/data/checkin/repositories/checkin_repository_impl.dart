@@ -1,9 +1,12 @@
+import 'dart:convert';
 import 'dart:io';
 
 import 'package:clean_architechture/data/checkin/models/response/checkin_response.dart';
 import 'package:clean_architechture/data/checkin/remote/checkin_api.dart';
 import 'package:clean_architechture/domain/checkin/respositories/check_in_repository.dart';
+import 'package:clean_architechture/utils/models/response_api.dart';
 import 'package:clean_architechture/utils/session_utils.dart';
+import 'package:dio/dio.dart';
 import 'package:location/location.dart';
 
 class CheckInRepositoryImpl implements CheckInRepository {
@@ -35,58 +38,69 @@ class CheckInRepositoryImpl implements CheckInRepository {
   }
 
   @override
-  Future<CheckInResponse> CheckIn(
+  Future<ResponseApi<CheckInResponse>> CheckIn(
       {required List<File> files, required String note}) async {
     try {
+      var message = "Co loi xay ra";
       // TODO: implement CheckIn
       var location = await _getCurrentLocation();
       var token = "Bearer " + SessionUtils.getAccessToken()!;
-      return await checkInApi
+      await checkInApi
+      // ignore: deprecated_member_use_from_same_package
           .checkIn(files, location.longitude, location.latitude, note, token)
           .then((value) {
-        print(value);
-        return value;
-      }, onError: (e) {
-        print(e);
-        return CheckInResponse(
-            Id: 1,
-            EmployeeCode: "EmployeeCode",
-            Checkin: "Checkin",
-            CheckIn_Longitude: 1.0000,
-            CheckIn_Latitude: .00,
-            CheckIn_Images: ["a", "a"],
-            CheckIn_Note: 'CheckIn_Note',
-            CheckIn_ShopId: 2,
-            CheckIn_ShopAddress: "CheckIn_ShopAddress",
-            CheckOut: 'CheckOut',
-            CheckOut_Longitude: 1.000,
-            CheckOut_Latitude: 1.00,
-            CheckOut_Images: ["a", "a"],
-            CheckOut_Note: "CheckOut_Note",
-            CheckOut_ShopId: 2,
-            CheckOut_ShopAddress: "CheckOut_ShopAddress",
-            CheckDate: "CheckDate");
+        return ResponseApi(status: true, description: "", body: null);
+      }, onError: (Object obj) {
+        switch (obj.runtimeType) {
+          case DioError:
+            // Here's the sample to get the failed response error code and message
+            final res = (obj as DioError).response;
+            print("Got error : ${res!.statusCode} -> ${res.statusMessage}");
+            var json = jsonDecode(res.toString());
+            message = json['Message'] as String;
+            break;
+          default:
+        }
+        return ResponseApi(status: false, description: message, body: null);
       });
+      return ResponseApi(status: false, description: message, body: null);
     } catch (ex) {
       print(ex);
-      return CheckInResponse(
-          Id: 1,
-          EmployeeCode: "EmployeeCode",
-          Checkin: "Checkin",
-          CheckIn_Longitude: 1.0000,
-          CheckIn_Latitude: .00,
-          CheckIn_Images: ["a", "a"],
-          CheckIn_Note: 'CheckIn_Note',
-          CheckIn_ShopId: 2,
-          CheckIn_ShopAddress: "CheckIn_ShopAddress",
-          CheckOut: 'CheckOut',
-          CheckOut_Longitude: 1.000,
-          CheckOut_Latitude: 1.00,
-          CheckOut_Images: ["a", "a"],
-          CheckOut_Note: "CheckOut_Note",
-          CheckOut_ShopId: 2,
-          CheckOut_ShopAddress: "CheckOut_ShopAddress",
-          CheckDate: "CheckDate");
+      return ResponseApi(
+          status: false, description: 'Có lỗi xảy ra', body: null);
+    }
+  }
+
+  @override
+  Future<ResponseApi<CheckInResponse>> CheckOut({required List<File> files, required String note}) async {
+    try {
+      var message = "Co loi xay ra";
+      // TODO: implement CheckIn
+      var location = await _getCurrentLocation();
+      var token = "Bearer " + SessionUtils.getAccessToken()!;
+      await checkInApi
+          // ignore: deprecated_member_use_from_same_package
+          .checkOut(files, location.longitude, location.latitude, note, token)
+          .then((value) {
+        return ResponseApi(status: true, description: "", body: null);
+      }, onError: (Object obj) {
+        switch (obj.runtimeType) {
+          case DioError:
+          // Here's the sample to get the failed response error code and message
+            final res = (obj as DioError).response;
+            print("Got error : ${res!.statusCode} -> ${res.statusMessage}");
+            var json = jsonDecode(res.toString());
+            message = json['Message'] as String;
+            break;
+          default:
+        }
+        return ResponseApi(status: false, description: message, body: null);
+      });
+      return ResponseApi(status: false, description: message, body: null);
+    } catch (ex) {
+      print(ex);
+      return ResponseApi(
+          status: false, description: 'Có lỗi xảy ra', body: null);
     }
   }
 }

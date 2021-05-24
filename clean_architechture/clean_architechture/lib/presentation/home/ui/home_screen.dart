@@ -86,7 +86,9 @@ class _HomeScreenState extends State<HomeScreen> {
                   FlatButton(
                     child: Text("Check out"),
                     color: Colors.blue,
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.pushNamed(context, RouteDefine.CheckOutScreen.name);
+                    },
                   ),
                 ],
               ),

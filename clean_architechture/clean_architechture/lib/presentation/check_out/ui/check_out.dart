@@ -1,30 +1,30 @@
 import 'dart:async';
 import 'dart:io';
 import 'package:clean_architechture/config/colors.dart';
-import 'package:clean_architechture/data/checkin/models/response/checkin_response.dart';
 import 'package:clean_architechture/presentation/check_in/bloc/checkin_bloc.dart';
+import 'package:clean_architechture/presentation/check_out/bloc/checkout_bloc.dart';
 import 'package:clean_architechture/presentation/common/dialog/loading_dialog.dart';
-import 'package:clean_architechture/presentation/login/bloc/login_bloc.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
 
-class CheckInScreen extends StatefulWidget {
+class CheckOutScreen extends StatefulWidget {
   @override
   State<StatefulWidget> createState() {
     // TODO: implement createState
-    return _CheckInScreenState();
+    return _CheckOutScreenState();
   }
 }
 
-class _CheckInScreenState extends State<CheckInScreen> {
+class _CheckOutScreenState extends State<CheckOutScreen> {
   final noteTextController = TextEditingController();
   final picker = ImagePicker();
   var checkInRes="";
   // ignore: deprecated_member_use
   List<File> imageFiles = [];
 
+  // ignore: always_declare_return_types
   _openGallary(BuildContext context) async {
     final pickedFile = await picker.getImage(source: ImageSource.gallery);
     setState(() {
@@ -62,7 +62,7 @@ class _CheckInScreenState extends State<CheckInScreen> {
                     onTap: () {
                       _openCamera(context);
                     },
-                     child: const Text("Camera"),
+                    child: const Text("Camera"),
                   )
                 ],
               ),
@@ -85,25 +85,25 @@ class _CheckInScreenState extends State<CheckInScreen> {
             children: [
               Expanded(
                   child: Image.file(
-                asset,
-                height: 300.0,
-                fit: BoxFit.cover,
-              )),
+                    asset,
+                    height: 300.0,
+                    fit: BoxFit.cover,
+                  )),
               Positioned(
                 top: -1,
                 left: -9,
                 child: Container(
                     child: FlatButton(
-                  onPressed: () {
-                    setState(() {
-                      imageFiles.removeAt(index);
-                    });
-                  },
-                  child: const Icon(
-                    Icons.delete_forever,
-                    color: Colors.red,
-                  ),
-                )),
+                      onPressed: () {
+                        setState(() {
+                          imageFiles.removeAt(index);
+                        });
+                      },
+                      child: const Icon(
+                        Icons.delete_forever,
+                        color: Colors.red,
+                      ),
+                    )),
               )
             ],
           );
@@ -116,17 +116,17 @@ class _CheckInScreenState extends State<CheckInScreen> {
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
     // TODO: implement build
-    return BlocConsumer<CheckInBloc, CheckInSate>(
+    return BlocConsumer<CheckOutBloc, CheckOutState>(
       listener: (context, state) {
         switch (state.runtimeType) {
-          case CheckInSuccessState:
+          case CheckOutSuccessState:
             LoadingDialog.hideLoadingDialog;
             break;
-          case CheckInErrorState:
-            print("Login error");
+          case CheckOutErrorState:
+            print("Check out error");
             LoadingDialog.hideLoadingDialog;
             break;
-          case CheckInLoadingState:
+          case CheckOutLoadingState:
             LoadingDialog.showLoadingDialog(context);
             break;
         }
@@ -135,7 +135,7 @@ class _CheckInScreenState extends State<CheckInScreen> {
         return Scaffold(
           appBar: AppBar(
             title: const Text(
-              "Check in",
+              "Check out",
               style: TextStyle(fontSize: 18),
             ),
           ),
@@ -177,7 +177,7 @@ class _CheckInScreenState extends State<CheckInScreen> {
                             const SizedBox(height: 20),
                             Container(
                               child: Text(
-                                state is CheckInSuccessState
+                                state is CheckOutSuccessState
                                     ? state.message
                                     : "",
                                 style: const TextStyle(
@@ -187,7 +187,7 @@ class _CheckInScreenState extends State<CheckInScreen> {
                             ),
                             Container(
                               child: Text(
-                                state is CheckInErrorState
+                                state is CheckOutErrorState
                                     ? state.message
                                     : "",
                                 style: const TextStyle(
@@ -198,7 +198,7 @@ class _CheckInScreenState extends State<CheckInScreen> {
                             const SizedBox(height: 40),
                             InkWell(
                               onTap: () {
-                                context.read<CheckInBloc>().add(CheckInProcess(
+                                context.read<CheckOutBloc>().add(CheckOutProcess(
                                     files: imageFiles,
                                     note: noteTextController.text,
                                     isError: true));
@@ -211,10 +211,10 @@ class _CheckInScreenState extends State<CheckInScreen> {
                                   color: AppColors.kPrimaryColor,
                                 ),
                                 padding:
-                                    const EdgeInsets.symmetric(vertical: 20),
+                                const EdgeInsets.symmetric(vertical: 20),
                                 alignment: Alignment.center,
                                 child: const Text(
-                                  'Check In',
+                                  'Check Out',
                                   style: TextStyle(
                                       color: Colors.white, fontSize: 18),
                                 ),

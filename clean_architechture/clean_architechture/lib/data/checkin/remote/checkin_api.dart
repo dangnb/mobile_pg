@@ -11,6 +11,7 @@ abstract class CheckInApi {
   factory CheckInApi(Dio dio, {String baseUrl}) = _CheckInApi;
 
   @POST('/checkin/in')
+  @Deprecated("Use badRequest instead")
   Future<CheckInResponse> checkIn(
     @Part(name: 'Images') List<File> file,
     @Part(name: 'Longitude') double longitude,
@@ -18,4 +19,13 @@ abstract class CheckInApi {
     @Part(name: 'Note') String note,
     @Header("Authorization") String? token
   );
+  @POST('/checkin/out')
+  @Deprecated("Use badRequest instead")
+  Future<CheckInResponse> checkOut(
+      @Part(name: 'Images') List<File> file,
+      @Part(name: 'Longitude') double longitude,
+      @Part(name: 'Latitude') double latitude,
+      @Part(name: 'Note') String note,
+      @Header("Authorization") String? token
+      );
 }

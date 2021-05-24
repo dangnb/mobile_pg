@@ -50,6 +50,7 @@ dependencies:
   location: ^4.1.1
   charts_common: ^0.10.0
   charts_flutter: ^0.10.0
+  device_info: any
 #  pull_to_refresh: ^1.6.4-nullsafety.0
 
 dev_dependencies:
